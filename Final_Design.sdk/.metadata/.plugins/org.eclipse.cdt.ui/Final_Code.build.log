@@ -1,0 +1,165 @@
+12:53:57 **** Build of configuration Debug for project Final_Code ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/echo.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/echo.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Final_Code_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/echo.d" -MT"src/echo.o" -o "src/echo.o" "../src/echo.c"
+'Finished building: ../src/echo.c'
+' '
+'Building file: ../src/i2c_access.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/i2c_access.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Final_Code_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/i2c_access.d" -MT"src/i2c_access.o" -o "src/i2c_access.o" "../src/i2c_access.c"
+'Finished building: ../src/i2c_access.c'
+' '
+'Building file: ../src/iic_phyreset.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_phyreset.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Final_Code_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_phyreset.d" -MT"src/iic_phyreset.o" -o "src/iic_phyreset.o" "../src/iic_phyreset.c"
+'Finished building: ../src/iic_phyreset.c'
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Final_Code_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:33:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPReceive;
+        ^
+../src/main.c:34:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xWriteAnalog;
+        ^
+../src/main.c:35:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPSend;
+        ^
+../src/main.c:36:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xAnalogRead;
+        ^
+../src/main.c:38:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue1 = NULL;
+        ^
+../src/main.c:38:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue1 = NULL;
+                                ^
+../src/main.c:39:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue2 = NULL;
+        ^
+../src/main.c:39:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue2 = NULL;
+                                ^
+../src/main.c: In function 'main':
+../src/main.c:92:2: warning: implicit declaration of function 'xTaskCreate' [-Wimplicit-function-declaration]
+  xTaskCreate(  WriteAnalog,    /* The function that implements the task. */
+  ^
+../src/main.c:94:11: error: 'configMINIMAL_STACK_SIZE' undeclared (first use in this function)
+           configMINIMAL_STACK_SIZE,  /* The stack allocated to the task. */
+           ^
+../src/main.c:94:11: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:96:11: error: 'tskIDLE_PRIORITY' undeclared (first use in this function)
+           tskIDLE_PRIORITY +2,   /* The task runs at the idle priority. */
+           ^
+../src/main.c:121:12: warning: implicit declaration of function 'xQueueCreate' [-Wimplicit-function-declaration]
+  xQueue1 = xQueueCreate(  1,      /* There is only one space in the queue. */
+            ^
+../src/main.c:126:2: warning: implicit declaration of function 'configASSERT' [-Wimplicit-function-declaration]
+  configASSERT( xQueue1 );
+  ^
+../src/main.c:128:3: warning: implicit declaration of function 'vTaskStartScheduler' [-Wimplicit-function-declaration]
+   vTaskStartScheduler();
+   ^
+../src/main.c: In function 'UDPReceive':
+../src/main.c:150:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:182:13: warning: implicit declaration of function 'xQueueSendToBack' [-Wimplicit-function-declaration]
+   xStatus = xQueueSendToBack( xQueue2, &recvd_num, 0 );
+             ^
+../src/main.c:183:18: error: 'pdPASS' undeclared (first use in this function)
+   if( xStatus != pdPASS )
+                  ^
+../src/main.c: In function 'WriteAnalog':
+../src/main.c:196:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:197:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:197:34: warning: implicit declaration of function 'pdMS_TO_TICKS' [-Wimplicit-function-declaration]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                                  ^
+../src/main.c:202:11: warning: implicit declaration of function 'uxQueueMessagesWaiting' [-Wimplicit-function-declaration]
+       if( uxQueueMessagesWaiting( xQueue2 ) != 0 )
+           ^
+../src/main.c:218:16: warning: implicit declaration of function 'xQueueReceive' [-Wimplicit-function-declaration]
+      xStatus = xQueueReceive (xQueue2, &output,xTicksToWait);
+                ^
+../src/main.c:220:22: error: 'pdPASS' undeclared (first use in this function)
+       if( xStatus != pdPASS )
+                      ^
+../src/main.c:230:6: warning: implicit declaration of function 'Xil_Out32' [-Wimplicit-function-declaration]
+      Xil_Out32(MY_PWM, output*2);
+      ^
+../src/main.c:230:16: error: 'MY_PWM' undeclared (first use in this function)
+      Xil_Out32(MY_PWM, output*2);
+                ^
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:241:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:247:10: warning: implicit declaration of function 'XSysMon_GetStatus' [-Wimplicit-function-declaration]
+  while ((XSysMon_GetStatus(SysMonInstPtr) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+          ^
+../src/main.c:247:28: error: 'SysMonInstPtr' undeclared (first use in this function)
+  while ((XSysMon_GetStatus(SysMonInstPtr) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+                            ^
+../src/main.c:247:45: error: 'XSM_SR_EOS_MASK' undeclared (first use in this function)
+  while ((XSysMon_GetStatus(SysMonInstPtr) & XSM_SR_EOS_MASK) != XSM_SR_EOS_MASK);
+                                             ^
+../src/main.c:249:16: warning: implicit declaration of function 'XSysMon_GetAdcData' [-Wimplicit-function-declaration]
+  TempRawData = XSysMon_GetAdcData(SysMonInstPtr, XSM_CH_TEMP);//Read the on-chip Temperature Data
+                ^
+../src/main.c:249:50: error: 'XSM_CH_TEMP' undeclared (first use in this function)
+  TempRawData = XSysMon_GetAdcData(SysMonInstPtr, XSM_CH_TEMP);//Read the on-chip Temperature Data
+                                                  ^
+../src/main.c:250:45: error: 'XSM_CH_AUX_MIN' undeclared (first use in this function)
+  mydata = XSysMon_GetAdcData(SysMonInstPtr, XSM_CH_AUX_MIN +14);
+                                             ^
+../src/main.c:251:13: warning: implicit declaration of function 'XSysMon_RawToTemperature' [-Wimplicit-function-declaration]
+  TempData = XSysMon_RawToTemperature(TempRawData);
+             ^
+../src/main.c:254:17: error: 'pdPASS' undeclared (first use in this function)
+  if( xStatus != pdPASS )
+                 ^
+../src/main.c:263:9: warning: format '%d' expects argument of type 'int', but argument 2 has type 'u32 {aka long unsigned int}' [-Wformat=]
+  printf("\r\nMy Data is %0d.\r\n",mydata);
+         ^
+../src/main.c:263:9: warning: format '%d' expects argument of type 'int', but argument 2 has type 'u32 {aka long unsigned int}' [-Wformat=]
+../src/main.c:264:52: error: 'XSM_CH_VCCINT' undeclared (first use in this function)
+  VccIntRawData = XSysMon_GetAdcData(SysMonInstPtr, XSM_CH_VCCINT); //Read the on-chip Vccint Data
+                                                    ^
+../src/main.c:265:15: warning: implicit declaration of function 'XSysMon_RawToVoltage' [-Wimplicit-function-declaration]
+  VccIntData = XSysMon_RawToVoltage(VccIntRawData);
+               ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:276:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:277:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:321:11: warning: 'return' with a value, in function returning void
+    return -1;
+           ^
+In file included from ../../Final_Code_bsp/ps7_cortexa9_0/include/lwip/netif.h:39:0,
+                 from ../../Final_Code_bsp/ps7_cortexa9_0/include/netif/xadapter.h:49,
+                 from ../src/main.c:3:
+../../Final_Code_bsp/ps7_cortexa9_0/include/lwip/err.h:53:24: warning: 'return' with a value, in function returning void
+ #define ERR_MEM        -1    /* Out of memory error.     */
+                        ^
+../src/main.c:406:14: note: in expansion of macro 'ERR_MEM'
+       return ERR_MEM;
+              ^
+../src/main.c:415:22: error: 'pdPASS' undeclared (first use in this function)
+       if( xStatus != pdPASS )
+                      ^
+make: *** [src/main.o] Fehler 1
+
+12:53:59 Build Finished (took 2s.156ms)
+

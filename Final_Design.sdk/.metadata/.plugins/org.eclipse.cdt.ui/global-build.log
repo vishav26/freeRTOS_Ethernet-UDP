@@ -1,0 +1,2869 @@
+11:21:39 **** Incremental Build of configuration Debug for project Test ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:74:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPReceive;
+        ^
+../src/main.c:75:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xWriteAnalog;
+        ^
+../src/main.c:76:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPSend;
+        ^
+../src/main.c:77:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xAnalogRead;
+        ^
+../src/main.c:79:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue1 = NULL;
+        ^
+../src/main.c:79:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue1 = NULL;
+                                ^
+../src/main.c:80:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue2 = NULL;
+        ^
+../src/main.c:80:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue2 = NULL;
+                                ^
+../src/main.c: In function 'main':
+../src/main.c:139:2: warning: implicit declaration of function 'xTaskCreate' [-Wimplicit-function-declaration]
+  xTaskCreate(  WriteAnalog,    /* The function that implements the task. */
+  ^
+../src/main.c:141:10: error: 'configMINIMAL_STACK_SIZE' undeclared (first use in this function)
+          configMINIMAL_STACK_SIZE,  /* The stack allocated to the task. */
+          ^
+../src/main.c:141:10: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:143:10: error: 'tskIDLE_PRIORITY' undeclared (first use in this function)
+          tskIDLE_PRIORITY +2,   /* The task runs at the idle priority. */
+          ^
+../src/main.c:176:13: warning: implicit declaration of function 'xQueueCreate' [-Wimplicit-function-declaration]
+   xQueue1 = xQueueCreate(  1,      /* There is only one space in the queue. */
+             ^
+../src/main.c:182:4: warning: implicit declaration of function 'configASSERT' [-Wimplicit-function-declaration]
+    configASSERT( xQueue1 );
+    ^
+../src/main.c:185:2: warning: implicit declaration of function 'vTaskStartScheduler' [-Wimplicit-function-declaration]
+  vTaskStartScheduler();
+  ^
+../src/main.c: In function 'UDPReceive':
+../src/main.c:206:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:212:8: error: unknown type name 'TickType_t'
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+        ^
+../src/main.c:212:28: warning: implicit declaration of function 'pdMS_TO_TICKS' [-Wimplicit-function-declaration]
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+                            ^
+../src/main.c:242:3: warning: implicit declaration of function 'vTaskDelay' [-Wimplicit-function-declaration]
+   vTaskDelay(x200ms);
+   ^
+../src/main.c:243:13: warning: implicit declaration of function 'xQueueSendToBack' [-Wimplicit-function-declaration]
+   xStatus = xQueueSendToBack( xQueue2, &recvd_num, 0 );
+             ^
+../src/main.c:244:18: error: 'pdPASS' undeclared (first use in this function)
+   if( xStatus != pdPASS )
+                  ^
+../src/main.c: In function 'WriteAnalog':
+../src/main.c:258:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:259:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:267:11: warning: implicit declaration of function 'uxQueueMessagesWaiting' [-Wimplicit-function-declaration]
+       if( uxQueueMessagesWaiting( xQueue2 ) != 0 )
+           ^
+../src/main.c:284:16: warning: implicit declaration of function 'xQueueReceive' [-Wimplicit-function-declaration]
+      xStatus = xQueueReceive (xQueue2, &output,xTicksToWait);
+                ^
+../src/main.c:286:22: error: 'pdPASS' undeclared (first use in this function)
+       if( xStatus != pdPASS )
+                      ^
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:305:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:306:8: error: unknown type name 'TickType_t'
+  const TickType_t x100ms = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+        ^
+../src/main.c:327:19: error: 'pdPASS' undeclared (first use in this function)
+    if( xStatus != pdPASS )
+                   ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:344:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:345:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:451:17: error: 'pdPASS' undeclared (first use in this function)
+  if( xStatus != pdPASS )
+                 ^
+make: *** [src/main.o] Fehler 1
+11:23:15 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+12:44:45 **** Auto Build of project Example_RTOS_bsp ****
+make -k all 
+"Running Make include in ps7_cortexa9_0/libsrc/coresightps_dcc_v1_3/src"
+make -C ps7_cortexa9_0/libsrc/coresightps_dcc_v1_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_3/src"
+make -C ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/ddrps_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/devcfg_v3_4/src"
+make -C ps7_cortexa9_0/libsrc/devcfg_v3_4/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/dmaps_v2_3/src"
+make -C ps7_cortexa9_0/libsrc/dmaps_v2_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/emacps_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/emacps_v3_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/freertos823_xilinx_v1_3/src"
+make -C ps7_cortexa9_0/libsrc/freertos823_xilinx_v1_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"include"
+"Running Make include in ps7_cortexa9_0/libsrc/gpiops_v3_1/src"
+make -C ps7_cortexa9_0/libsrc/gpiops_v3_1/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/lwip141_v1_7/src"
+make -C ps7_cortexa9_0/libsrc/lwip141_v1_7/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/My_Counter_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/My_Counter_v1_0/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/My_Output_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/My_Output_v1_0/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/qspips_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/qspips_v3_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/scugic_v3_5/src"
+make -C ps7_cortexa9_0/libsrc/scugic_v3_5/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/scutimer_v2_1/src"
+make -C ps7_cortexa9_0/libsrc/scutimer_v2_1/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/scuwdt_v2_1/src"
+make -C ps7_cortexa9_0/libsrc/scuwdt_v2_1/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/sdps_v3_1/src"
+make -C ps7_cortexa9_0/libsrc/sdps_v3_1/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/ttcps_v3_2/src"
+make -C ps7_cortexa9_0/libsrc/ttcps_v3_2/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/uartps_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/uartps_v3_3/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/usbps_v2_4/src"
+make -C ps7_cortexa9_0/libsrc/usbps_v2_4/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make include in ps7_cortexa9_0/libsrc/xadcps_v2_2/src"
+make -C ps7_cortexa9_0/libsrc/xadcps_v2_2/src -s include  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Running Make libs in ps7_cortexa9_0/libsrc/coresightps_dcc_v1_3/src"
+make -C ps7_cortexa9_0/libsrc/coresightps_dcc_v1_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling coresightps_dcc"
+"Running Make libs in ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_3/src"
+make -C ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling cpu_cortexa9"
+"Running Make libs in ps7_cortexa9_0/libsrc/ddrps_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling ddrps"
+"Running Make libs in ps7_cortexa9_0/libsrc/devcfg_v3_4/src"
+make -C ps7_cortexa9_0/libsrc/devcfg_v3_4/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling devcfg"
+"Running Make libs in ps7_cortexa9_0/libsrc/dmaps_v2_3/src"
+make -C ps7_cortexa9_0/libsrc/dmaps_v2_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling dmaps"
+"Running Make libs in ps7_cortexa9_0/libsrc/emacps_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/emacps_v3_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling emacps"
+"Running Make libs in ps7_cortexa9_0/libsrc/freertos823_xilinx_v1_3/src"
+make -C ps7_cortexa9_0/libsrc/freertos823_xilinx_v1_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling standalone"
+"Compiling FreeRTOS"
+"Running Make libs in ps7_cortexa9_0/libsrc/gpiops_v3_1/src"
+make -C ps7_cortexa9_0/libsrc/gpiops_v3_1/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling gpiops"
+"Running Make libs in ps7_cortexa9_0/libsrc/lwip141_v1_7/src"
+make -C ps7_cortexa9_0/libsrc/lwip141_v1_7/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling lwip src and adapter files"
+"Running Make libs in ps7_cortexa9_0/libsrc/My_Counter_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/My_Counter_v1_0/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling My_Counter..."
+"Running Make libs in ps7_cortexa9_0/libsrc/My_Output_v1_0/src"
+make -C ps7_cortexa9_0/libsrc/My_Output_v1_0/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling My_Output..."
+"Running Make libs in ps7_cortexa9_0/libsrc/qspips_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/qspips_v3_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling qspips"
+"Running Make libs in ps7_cortexa9_0/libsrc/scugic_v3_5/src"
+make -C ps7_cortexa9_0/libsrc/scugic_v3_5/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling scugic"
+"Running Make libs in ps7_cortexa9_0/libsrc/scutimer_v2_1/src"
+make -C ps7_cortexa9_0/libsrc/scutimer_v2_1/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling scutimer"
+"Running Make libs in ps7_cortexa9_0/libsrc/scuwdt_v2_1/src"
+make -C ps7_cortexa9_0/libsrc/scuwdt_v2_1/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling scuwdt"
+"Running Make libs in ps7_cortexa9_0/libsrc/sdps_v3_1/src"
+make -C ps7_cortexa9_0/libsrc/sdps_v3_1/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling sdps"
+"Running Make libs in ps7_cortexa9_0/libsrc/ttcps_v3_2/src"
+make -C ps7_cortexa9_0/libsrc/ttcps_v3_2/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling ttcps"
+"Running Make libs in ps7_cortexa9_0/libsrc/uartps_v3_3/src"
+make -C ps7_cortexa9_0/libsrc/uartps_v3_3/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling uartps"
+"Running Make libs in ps7_cortexa9_0/libsrc/usbps_v2_4/src"
+make -C ps7_cortexa9_0/libsrc/usbps_v2_4/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling usbps"
+"Running Make libs in ps7_cortexa9_0/libsrc/xadcps_v2_2/src"
+make -C ps7_cortexa9_0/libsrc/xadcps_v2_2/src -s libs  "SHELL=CMD" "COMPILER=arm-none-eabi-gcc" "ARCHIVER=arm-none-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -nostartfiles"
+"Compiling xadcps"
+'Finished building libraries'
+12:45:34 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89644	   4184	  89408	 183236	  2cbc4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+12:45:36 **** Build of configuration Debug for project Test ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/echo.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/echo.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/echo.d" -MT"src/echo.o" -o "src/echo.o" "../src/echo.c"
+'Finished building: ../src/echo.c'
+' '
+'Building file: ../src/i2c_access.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/i2c_access.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/i2c_access.d" -MT"src/i2c_access.o" -o "src/i2c_access.o" "../src/i2c_access.c"
+'Finished building: ../src/i2c_access.c'
+' '
+'Building file: ../src/iic_phyreset.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_phyreset.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_phyreset.d" -MT"src/iic_phyreset.o" -o "src/iic_phyreset.o" "../src/iic_phyreset.c"
+'Finished building: ../src/iic_phyreset.c'
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:74:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPReceive;
+        ^
+../src/main.c:75:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xWriteAnalog;
+        ^
+../src/main.c:76:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPSend;
+        ^
+../src/main.c:77:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xAnalogRead;
+        ^
+../src/main.c:79:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue1 = NULL;
+        ^
+../src/main.c:79:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue1 = NULL;
+                                ^
+../src/main.c:80:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue2 = NULL;
+        ^
+../src/main.c:80:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue2 = NULL;
+                                ^
+../src/main.c: In function 'main':
+../src/main.c:139:2: warning: implicit declaration of function 'xTaskCreate' [-Wimplicit-function-declaration]
+  xTaskCreate(  WriteAnalog,    /* The function that implements the task. */
+  ^
+../src/main.c:141:10: error: 'configMINIMAL_STACK_SIZE' undeclared (first use in this function)
+          configMINIMAL_STACK_SIZE,  /* The stack allocated to the task. */
+          ^
+../src/main.c:141:10: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:143:10: error: 'tskIDLE_PRIORITY' undeclared (first use in this function)
+          tskIDLE_PRIORITY +2,   /* The task runs at the idle priority. */
+          ^
+../src/main.c:176:13: warning: implicit declaration of function 'xQueueCreate' [-Wimplicit-function-declaration]
+   xQueue1 = xQueueCreate(  1,      /* There is only one space in the queue. */
+             ^
+../src/main.c:182:4: warning: implicit declaration of function 'configASSERT' [-Wimplicit-function-declaration]
+    configASSERT( xQueue1 );
+    ^
+../src/main.c:185:2: warning: implicit declaration of function 'vTaskStartScheduler' [-Wimplicit-function-declaration]
+  vTaskStartScheduler();
+  ^
+../src/main.c: In function 'UDPReceive':
+../src/main.c:206:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:212:8: error: unknown type name 'TickType_t'
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+        ^
+../src/main.c:212:28: warning: implicit declaration of function 'pdMS_TO_TICKS' [-Wimplicit-function-declaration]
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+                            ^
+../src/main.c:242:3: warning: implicit declaration of function 'vTaskDelay' [-Wimplicit-function-declaration]
+   vTaskDelay(x200ms);
+   ^
+../src/main.c:243:13: warning: implicit declaration of function 'xQueueSendToBack' [-Wimplicit-function-declaration]
+   xStatus = xQueueSendToBack( xQueue2, &recvd_num, 0 );
+             ^
+../src/main.c:244:18: error: 'pdPASS' undeclared (first use in this function)
+   if( xStatus != pdPASS )
+                  ^
+../src/main.c: In function 'WriteAnalog':
+../src/main.c:258:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:259:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:267:11: warning: implicit declaration of function 'uxQueueMessagesWaiting' [-Wimplicit-function-declaration]
+       if( uxQueueMessagesWaiting( xQueue2 ) != 0 )
+           ^
+../src/main.c:284:16: warning: implicit declaration of function 'xQueueReceive' [-Wimplicit-function-declaration]
+      xStatus = xQueueReceive (xQueue2, &output,xTicksToWait);
+                ^
+../src/main.c:286:22: error: 'pdPASS' undeclared (first use in this function)
+       if( xStatus != pdPASS )
+                      ^
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:305:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:306:8: error: unknown type name 'TickType_t'
+  const TickType_t x100ms = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+        ^
+../src/main.c:327:19: error: 'pdPASS' undeclared (first use in this function)
+    if( xStatus != pdPASS )
+                   ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:344:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:345:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:451:17: error: 'pdPASS' undeclared (first use in this function)
+  if( xStatus != pdPASS )
+                 ^
+make: *** [src/main.o] Fehler 1
+12:45:37 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+12:52:34 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:177:3: error: 'xQueue3' undeclared (first use in this function)
+   xQueue3 = xQueueCreate(  1,      /* There is only one space in the queue. */
+   ^
+../src/main.c:177:3: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/arch/sys_arch.h:105:0,
+                 from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/lwip/sys.h:92,
+                 from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/netif/xadapter.h:46,
+                 from ../src/main.c:35:
+../src/main.c: In function 'UDPReceive':
+../src/main.c:238:28: error: 'xQueue3' undeclared (first use in this function)
+   xStatus = xQueueReceive (xQueue3, &output,xTicksToWait);
+                            ^
+../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/queue.h:814:81: note: in definition of macro 'xQueueReceive'
+ #define xQueueReceive( xQueue, pvBuffer, xTicksToWait ) xQueueGenericReceive( ( xQueue ), ( pvBuffer ), ( xTicksToWait ), pdFALSE )
+                                                                                 ^
+../src/main.c:238:45: error: 'xTicksToWait' undeclared (first use in this function)
+   xStatus = xQueueReceive (xQueue3, &output,xTicksToWait);
+                                             ^
+../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/queue.h:814:107: note: in definition of macro 'xQueueReceive'
+ #define xQueueReceive( xQueue, pvBuffer, xTicksToWait ) xQueueGenericReceive( ( xQueue ), ( pvBuffer ), ( xTicksToWait ), pdFALSE )
+                                                                                                           ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:462:30: error: 'xQueue3' undeclared (first use in this function)
+  xStatus = xQueueSendToBack( xQueue3,   /* The queue being written to. */
+                              ^
+../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/queue.h:337:86: note: in definition of macro 'xQueueSendToBack'
+ #define xQueueSendToBack( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                      ^
+../src/main.c: At top level:
+../src/main.c:73:13: warning: 'NoTask' declared 'static' but never defined [-Wunused-function]
+ static void NoTask( void *pvParameters );
+             ^
+make: *** [src/main.o] Fehler 1
+12:58:17 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:177:3: error: 'xQueue3' undeclared (first use in this function)
+   xQueue3 = xQueueCreate(  1,      /* There is only one space in the queue. */
+   ^
+../src/main.c:177:3: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/arch/sys_arch.h:105:0,
+                 from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/lwip/sys.h:92,
+                 from ../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/netif/xadapter.h:46,
+                 from ../src/main.c:35:
+../src/main.c: In function 'UDPReceive':
+../src/main.c:239:28: error: 'xQueue3' undeclared (first use in this function)
+   xStatus = xQueueReceive (xQueue3, &output,xTicksToWait);
+                            ^
+../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/queue.h:814:81: note: in definition of macro 'xQueueReceive'
+ #define xQueueReceive( xQueue, pvBuffer, xTicksToWait ) xQueueGenericReceive( ( xQueue ), ( pvBuffer ), ( xTicksToWait ), pdFALSE )
+                                                                                 ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:463:30: error: 'xQueue3' undeclared (first use in this function)
+  xStatus = xQueueSendToBack( xQueue3,   /* The queue being written to. */
+                              ^
+../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include/queue.h:337:86: note: in definition of macro 'xQueueSendToBack'
+ #define xQueueSendToBack( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                      ^
+../src/main.c: At top level:
+../src/main.c:73:13: warning: 'NoTask' declared 'static' but never defined [-Wunused-function]
+ static void NoTask( void *pvParameters );
+             ^
+make: *** [src/main.o] Fehler 1
+12:58:57 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:73:13: warning: 'NoTask' declared 'static' but never defined [-Wunused-function]
+ static void NoTask( void *pvParameters );
+             ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 183100	   4244	2218272	2405616	 24b4f0	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+12:59:07 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 183100	   4244	2218272	2405616	 24b4f0	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+12:59:40 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'UDPReceive':
+../src/main.c:212:19: warning: unused variable 'x200ms' [-Wunused-variable]
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+                   ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 183100	   4244	2218272	2405616	 24b4f0	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+12:59:53 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 183036	   4244	2218272	2405552	 24b4b0	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+12:59:58 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:03:08 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:08:40 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 182196	   4244	2218272	2404712	 24b168	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:09:13 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:10:27 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 182132	   4244	2218272	2404648	 24b128	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:10:53 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:12:12 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:13:49 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:14:34 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:26:03 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89708	   4184	  89424	 183316	  2cc14	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+13:27:07 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89772	   4184	  89424	 183380	  2cc54	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+13:28:19 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89668	   4184	  89424	 183276	  2cbec	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+13:28:26 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:29:58 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89668	   4184	  89424	 183276	  2cbec	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+13:30:26 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+In file included from ../../Example_RTOS_bsp/ps7_cortexa9_0/include/FreeRTOS.h:101:0,
+                 from ../src/freertos_hello_world.c:97:
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:197:41: error: 'DELAY_10_MILLISECONDS' undeclared (first use in this function)
+ const TickType_t x10ms = pdMS_TO_TICKS( DELAY_10_MILLISECONDS );
+                                         ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+../src/freertos_hello_world.c:197:41: note: each undeclared identifier is reported only once for each function it appears in
+ const TickType_t x10ms = pdMS_TO_TICKS( DELAY_10_MILLISECONDS );
+                                         ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+../src/freertos_hello_world.c:203:15: error: 'x1second' undeclared (first use in this function)
+   vTaskDelay( x1second );
+               ^
+../src/freertos_hello_world.c:197:18: warning: unused variable 'x10ms' [-Wunused-variable]
+ const TickType_t x10ms = pdMS_TO_TICKS( DELAY_10_MILLISECONDS );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+13:30:36 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+In file included from ../../Example_RTOS_bsp/ps7_cortexa9_0/include/FreeRTOS.h:101:0,
+                 from ../src/freertos_hello_world.c:97:
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:197:41: error: 'DELAY_10_MILLISECONDS' undeclared (first use in this function)
+ const TickType_t x10ms = pdMS_TO_TICKS( DELAY_10_MILLISECONDS );
+                                         ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+../src/freertos_hello_world.c:197:41: note: each undeclared identifier is reported only once for each function it appears in
+ const TickType_t x10ms = pdMS_TO_TICKS( DELAY_10_MILLISECONDS );
+                                         ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+13:31:01 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89668	   4184	  89424	 183276	  2cbec	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+13:31:07 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:35:12 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:207:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:35:51 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:37:06 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:207:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:37:25 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:41:56 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:207:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:42:19 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:45:16 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:207:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:48:57 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:207:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:241:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:69:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:70:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:74:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:75:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:49:19 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+13:52:23 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:218:16: error: storage size of 'ipaddr' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+../src/freertos_hello_world.c:218:24: error: storage size of 'netmask' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:218:33: error: storage size of 'gw' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:219:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:217:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:226:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:226:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:226:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:242:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:244:2: warning: implicit declaration of function 'init_platform' [-Wimplicit-function-declaration]
+  init_platform();
+  ^
+../src/freertos_hello_world.c:248:2: warning: implicit declaration of function 'IP4_ADDR' [-Wimplicit-function-declaration]
+  IP4_ADDR(&ipaddr,  192, 168,   1, 10);
+  ^
+../src/freertos_hello_world.c:252:2: warning: implicit declaration of function 'print_app_header' [-Wimplicit-function-declaration]
+  print_app_header();
+  ^
+../src/freertos_hello_world.c:254:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:257:7: warning: implicit declaration of function 'xemac_add' [-Wimplicit-function-declaration]
+  if (!xemac_add(echo_netif, &ipaddr, &netmask,
+       ^
+../src/freertos_hello_world.c:259:8: error: 'PLATFORM_EMAC_BASEADDR' undeclared (first use in this function)
+        PLATFORM_EMAC_BASEADDR))
+        ^
+../src/freertos_hello_world.c:265:2: warning: implicit declaration of function 'netif_set_default' [-Wimplicit-function-declaration]
+  netif_set_default(echo_netif);
+  ^
+../src/freertos_hello_world.c:268:2: warning: implicit declaration of function 'platform_enable_interrupts' [-Wimplicit-function-declaration]
+  platform_enable_interrupts();
+  ^
+../src/freertos_hello_world.c:271:2: warning: implicit declaration of function 'netif_set_up' [-Wimplicit-function-declaration]
+  netif_set_up(echo_netif);
+  ^
+../src/freertos_hello_world.c:285:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:288:2: warning: implicit declaration of function 'start_application' [-Wimplicit-function-declaration]
+  start_application();
+  ^
+../src/freertos_hello_world.c:241:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:221:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:220:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c:218:33: warning: unused variable 'gw' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:218:24: warning: unused variable 'netmask' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:218:16: warning: unused variable 'ipaddr' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+13:54:26 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/echo.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/echo.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/echo.d" -MT"src/echo.o" -o "src/echo.o" "../src/echo.c"
+'Finished building: ../src/echo.c'
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:218:16: error: storage size of 'ipaddr' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+../src/freertos_hello_world.c:218:24: error: storage size of 'netmask' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:218:33: error: storage size of 'gw' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:219:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:217:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:226:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:226:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:226:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:242:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:244:2: warning: implicit declaration of function 'init_platform' [-Wimplicit-function-declaration]
+  init_platform();
+  ^
+../src/freertos_hello_world.c:248:2: warning: implicit declaration of function 'IP4_ADDR' [-Wimplicit-function-declaration]
+  IP4_ADDR(&ipaddr,  192, 168,   1, 10);
+  ^
+../src/freertos_hello_world.c:252:2: warning: implicit declaration of function 'print_app_header' [-Wimplicit-function-declaration]
+  print_app_header();
+  ^
+../src/freertos_hello_world.c:254:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:257:7: warning: implicit declaration of function 'xemac_add' [-Wimplicit-function-declaration]
+  if (!xemac_add(echo_netif, &ipaddr, &netmask,
+       ^
+../src/freertos_hello_world.c:259:8: error: 'PLATFORM_EMAC_BASEADDR' undeclared (first use in this function)
+        PLATFORM_EMAC_BASEADDR))
+        ^
+../src/freertos_hello_world.c:265:2: warning: implicit declaration of function 'netif_set_default' [-Wimplicit-function-declaration]
+  netif_set_default(echo_netif);
+  ^
+../src/freertos_hello_world.c:268:2: warning: implicit declaration of function 'platform_enable_interrupts' [-Wimplicit-function-declaration]
+  platform_enable_interrupts();
+  ^
+../src/freertos_hello_world.c:271:2: warning: implicit declaration of function 'netif_set_up' [-Wimplicit-function-declaration]
+  netif_set_up(echo_netif);
+  ^
+../src/freertos_hello_world.c:285:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:288:2: warning: implicit declaration of function 'start_application' [-Wimplicit-function-declaration]
+  start_application();
+  ^
+../src/freertos_hello_world.c:241:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:221:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:220:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c:218:33: warning: unused variable 'gw' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:218:24: warning: unused variable 'netmask' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:218:16: warning: unused variable 'ipaddr' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+13:56:07 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:222:16: error: storage size of 'ipaddr' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+../src/freertos_hello_world.c:222:24: error: storage size of 'netmask' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:222:33: error: storage size of 'gw' isn't known
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:223:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:221:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:230:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:230:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:230:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:246:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:248:2: warning: implicit declaration of function 'init_platform' [-Wimplicit-function-declaration]
+  init_platform();
+  ^
+../src/freertos_hello_world.c:252:2: warning: implicit declaration of function 'IP4_ADDR' [-Wimplicit-function-declaration]
+  IP4_ADDR(&ipaddr,  192, 168,   1, 10);
+  ^
+../src/freertos_hello_world.c:256:2: warning: implicit declaration of function 'print_app_header' [-Wimplicit-function-declaration]
+  print_app_header();
+  ^
+../src/freertos_hello_world.c:258:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:261:7: warning: implicit declaration of function 'xemac_add' [-Wimplicit-function-declaration]
+  if (!xemac_add(echo_netif, &ipaddr, &netmask,
+       ^
+../src/freertos_hello_world.c:263:8: error: 'PLATFORM_EMAC_BASEADDR' undeclared (first use in this function)
+        PLATFORM_EMAC_BASEADDR))
+        ^
+../src/freertos_hello_world.c:269:2: warning: implicit declaration of function 'netif_set_default' [-Wimplicit-function-declaration]
+  netif_set_default(echo_netif);
+  ^
+../src/freertos_hello_world.c:272:2: warning: implicit declaration of function 'platform_enable_interrupts' [-Wimplicit-function-declaration]
+  platform_enable_interrupts();
+  ^
+../src/freertos_hello_world.c:275:2: warning: implicit declaration of function 'netif_set_up' [-Wimplicit-function-declaration]
+  netif_set_up(echo_netif);
+  ^
+../src/freertos_hello_world.c:289:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:292:2: warning: implicit declaration of function 'start_application' [-Wimplicit-function-declaration]
+  start_application();
+  ^
+../src/freertos_hello_world.c:245:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:225:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:224:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c:222:33: warning: unused variable 'gw' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                                 ^
+../src/freertos_hello_world.c:222:24: warning: unused variable 'netmask' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                        ^
+../src/freertos_hello_world.c:222:16: warning: unused variable 'ipaddr' [-Wunused-variable]
+ struct ip_addr ipaddr, netmask, gw;
+                ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+13:57:49 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:213:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:247:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:246:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:75:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:76:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:80:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:81:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+13:58:12 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:01:13 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:230:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:228:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:237:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:237:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:237:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:253:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:263:2: warning: implicit declaration of function 'print_app_header' [-Wimplicit-function-declaration]
+  print_app_header();
+  ^
+../src/freertos_hello_world.c:265:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:296:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:299:2: warning: implicit declaration of function 'start_application' [-Wimplicit-function-declaration]
+  start_application();
+  ^
+../src/freertos_hello_world.c:252:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:232:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:231:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:01:59 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:236:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:234:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:243:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:243:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:243:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:259:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:269:2: warning: implicit declaration of function 'print_app_header' [-Wimplicit-function-declaration]
+  print_app_header();
+  ^
+../src/freertos_hello_world.c:271:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:302:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:305:2: warning: implicit declaration of function 'start_application' [-Wimplicit-function-declaration]
+  start_application();
+  ^
+../src/freertos_hello_world.c:258:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:238:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:237:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:02:45 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:239:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:237:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:246:2: error: 'echo_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+  ^
+../src/freertos_hello_world.c:246:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:246:16: error: 'server_netif' undeclared (first use in this function)
+  echo_netif = &server_netif;
+                ^
+../src/freertos_hello_world.c:262:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:274:2: warning: implicit declaration of function 'lwip_init' [-Wimplicit-function-declaration]
+  lwip_init();
+  ^
+../src/freertos_hello_world.c:305:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:261:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:241:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:240:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:03:33 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:242:8: error: conflicting types for 'output'
+  float output;
+        ^
+../src/freertos_hello_world.c:240:5: note: previous declaration of 'output' was here
+ int output;
+     ^
+../src/freertos_hello_world.c:265:15: error: 'data' undeclared (first use in this function)
+  len = sizeof(data);
+               ^
+../src/freertos_hello_world.c:265:15: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:308:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:264:6: warning: variable 'len' set but not used [-Wunused-but-set-variable]
+  int len =0;
+      ^
+../src/freertos_hello_world.c:244:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:243:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:04:25 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:308:2: warning: implicit declaration of function 'print_ip_settings' [-Wimplicit-function-declaration]
+  print_ip_settings(&ipaddr, &netmask, &gw);
+  ^
+../src/freertos_hello_world.c:244:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:243:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building file: ../src/i2c_access.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/i2c_access.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/i2c_access.d" -MT"src/i2c_access.o" -o "src/i2c_access.o" "../src/i2c_access.c"
+'Finished building: ../src/i2c_access.c'
+' '
+'Building file: ../src/iic_phyreset.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_phyreset.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_phyreset.d" -MT"src/iic_phyreset.o" -o "src/iic_phyreset.o" "../src/iic_phyreset.c"
+'Finished building: ../src/iic_phyreset.c'
+' '
+'Building file: ../src/platform.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.o" -o "src/platform.o" "../src/platform.c"
+'Finished building: ../src/platform.c'
+' '
+'Building file: ../src/platform_mb.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform_mb.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform_mb.d" -MT"src/platform_mb.o" -o "src/platform_mb.o" "../src/platform_mb.c"
+'Finished building: ../src/platform_mb.c'
+' '
+'Building file: ../src/platform_ppc.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform_ppc.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform_ppc.d" -MT"src/platform_ppc.o" -o "src/platform_ppc.o" "../src/platform_ppc.c"
+'Finished building: ../src/platform_ppc.c'
+' '
+'Building file: ../src/platform_zynq.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform_zynq.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform_zynq.d" -MT"src/platform_zynq.o" -o "src/platform_zynq.o" "../src/platform_zynq.c"
+'Finished building: ../src/platform_zynq.c'
+' '
+'Building file: ../src/platform_zynqmp.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform_zynqmp.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform_zynqmp.d" -MT"src/platform_zynqmp.o" -o "src/platform_zynqmp.o" "../src/platform_zynqmp.c"
+'Finished building: ../src/platform_zynqmp.c'
+' '
+'Building file: ../src/sfp.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/sfp.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/sfp.d" -MT"src/sfp.o" -o "src/sfp.o" "../src/sfp.c"
+'Finished building: ../src/sfp.c'
+' '
+'Building file: ../src/si5324.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/si5324.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/si5324.d" -MT"src/si5324.o" -o "src/si5324.o" "../src/si5324.c"
+'Finished building: ../src/si5324.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+./src/freertos_hello_world.o: In function `prvRxTask':
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:308: undefined reference to `print_ip_settings'
+collect2.exe: error: ld returned 1 exit status
+make: *** [Example_RTOS.elf] Fehler 1
+14:05:10 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'print_ip_settings':
+../src/freertos_hello_world.c:158:2: warning: implicit declaration of function 'print_ip' [-Wimplicit-function-declaration]
+  print_ip("Board IP: ", ip);
+  ^
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:253:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:252:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+./src/freertos_hello_world.o: In function `print_ip_settings':
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:158: undefined reference to `print_ip'
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:159: undefined reference to `print_ip'
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:160: undefined reference to `print_ip'
+collect2.exe: error: ld returned 1 exit status
+make: *** [Example_RTOS.elf] Fehler 1
+14:05:27 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153184	   4244	2152752	2310180	 234024	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:06:05 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:06:39 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:08:31 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:19:51 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153184	   4244	2152752	2310180	 234024	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:21:00 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:26:31 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:26:53 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:27:37 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:27:56 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:29:11 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:30:08 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:32:03 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/platform_zynq.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform_zynq.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform_zynq.d" -MT"src/platform_zynq.o" -o "src/platform_zynq.o" "../src/platform_zynq.c"
+'Finished building: ../src/platform_zynq.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+14:32:22 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:34:47 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:36:10 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:213:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:247:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:246:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:75:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:76:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:80:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:81:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181868	   4244	2218272	2404384	 24b020	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+14:36:26 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:39:26 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:42:59 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:43:24 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:43:50 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:51:59 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+14:54:09 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+14:56:33 **** Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: RTOS_Hello.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "RTOS_Hello.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: RTOS_Hello.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size RTOS_Hello.elf  |tee "RTOS_Hello.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89644	   4184	  89408	 183236	  2cbc4	RTOS_Hello.elf
+'Finished building: RTOS_Hello.elf.size'
+' '
+14:58:42 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:198:3: error: 'value_old' undeclared (first use in this function)
+   value_old = Xil_In32(MY_COUNTER);
+   ^
+../src/freertos_hello_world.c:198:3: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:198:15: warning: implicit declaration of function 'Xil_In32' [-Wimplicit-function-declaration]
+   value_old = Xil_In32(MY_COUNTER);
+               ^
+../src/freertos_hello_world.c:200:17: error: 'x100ms' undeclared (first use in this function)
+     vTaskDelay( x100ms );
+                 ^
+../src/freertos_hello_world.c:201:5: error: 'value_new' undeclared (first use in this function)
+     value_new = Xil_In32(MY_COUNTER);
+     ^
+../src/freertos_hello_world.c:194:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_1_SECOND );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:59:01 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:199:3: error: 'value_old' undeclared (first use in this function)
+   value_old = Xil_In32(MY_COUNTER);
+   ^
+../src/freertos_hello_world.c:199:3: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:201:17: error: 'x100ms' undeclared (first use in this function)
+     vTaskDelay( x100ms );
+                 ^
+../src/freertos_hello_world.c:202:5: error: 'value_new' undeclared (first use in this function)
+     value_new = Xil_In32(MY_COUNTER);
+     ^
+../src/freertos_hello_world.c:195:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_1_SECOND );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+14:59:38 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:202:17: error: 'x100ms' undeclared (first use in this function)
+     vTaskDelay( x100ms );
+                 ^
+../src/freertos_hello_world.c:202:17: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:196:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_1_SECOND );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:00:07 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:203:17: error: 'x100ms' undeclared (first use in this function)
+     vTaskDelay( x100ms );
+                 ^
+../src/freertos_hello_world.c:203:17: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:197:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_1_SECOND );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:00:52 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:203:17: error: 'x100ms' undeclared (first use in this function)
+     vTaskDelay( x100ms );
+                 ^
+../src/freertos_hello_world.c:203:17: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:197:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:01:00 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvTxTask':
+../src/freertos_hello_world.c:203:17: error: 'x1s' undeclared (first use in this function)
+     vTaskDelay( x1s );
+                 ^
+../src/freertos_hello_world.c:203:17: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:197:18: warning: unused variable 'x1second' [-Wunused-variable]
+ const TickType_t x1second = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+                  ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:01:06 **** Auto Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: RTOS_Hello.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "RTOS_Hello.elf"  ./src/freertos_hello_world.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: RTOS_Hello.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size RTOS_Hello.elf  |tee "RTOS_Hello.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  89772	   4184	  89424	 183380	  2cc54	RTOS_Hello.elf
+'Finished building: RTOS_Hello.elf.size'
+' '
+15:01:23 **** Incremental Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:02:29 **** Incremental Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:03:13 **** Incremental Build of configuration Debug for project RTOS_Hello ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:04:15 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153120	   4244	2152752	2310116	 233fe4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:05:09 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:10:36 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:213:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:247:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:246:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:75:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:76:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:80:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:81:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181852	   4244	2218272	2404368	 24b010	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+15:10:54 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:11:16 **** Incremental Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:18:44 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:19:17 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153056	   4244	2152752	2310052	 233fa4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:19:28 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:20:06 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153056	   4244	2152752	2310052	 233fa4	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:20:12 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:21:56 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+In file included from ../../Example_RTOS_bsp/ps7_cortexa9_0/include/FreeRTOS.h:101:0,
+                 from ../src/freertos_hello_world.c:98:
+../src/freertos_hello_world.c: In function 'main':
+../src/freertos_hello_world.c:174:47: error: 'DELAY_10_SECONDS' undeclared (first use in this function)
+  const TickType_t x10seconds = pdMS_TO_TICKS( DELAY_10_SECONDS );
+                                               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+../src/freertos_hello_world.c:174:47: note: each undeclared identifier is reported only once for each function it appears in
+  const TickType_t x10seconds = pdMS_TO_TICKS( DELAY_10_SECONDS );
+                                               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/projdefs.h:80:74: note: in definition of macro 'pdMS_TO_TICKS'
+ #define pdMS_TO_TICKS( xTimeInMs ) ( ( TickType_t ) ( ( ( TickType_t ) ( xTimeInMs ) * ( TickType_t ) configTICK_RATE_HZ ) / ( TickType_t ) 1000 ) )
+                                                                          ^
+../src/freertos_hello_world.c:214:17: error: 'TIMER_ID' undeclared (first use in this function)
+        (void *) TIMER_ID,
+                 ^
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:262:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:261:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c: In function 'vTimerCallback':
+../src/freertos_hello_world.c:351:18: error: 'TIMER_ID' undeclared (first use in this function)
+  if (lTimerId != TIMER_ID) {
+                  ^
+../src/freertos_hello_world.c:360:20: error: 'TIMER_CHECK_THRESHOLD' undeclared (first use in this function)
+  if (RxtaskCntr >= TIMER_CHECK_THRESHOLD) {
+                    ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:22:41 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:251:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:250:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c: At top level:
+../src/freertos_hello_world.c:134:13: warning: 'vTimerCallback' declared 'static' but never defined [-Wunused-function]
+ static void vTimerCallback( TimerHandle_t pxTimer );
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 152720	   4244	2152752	2309716	 233e54	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:22:50 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:23:03 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:23:49 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'prvRxTask':
+../src/freertos_hello_world.c:251:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:250:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/freertos_hello_world.c: At top level:
+../src/freertos_hello_world.c:134:13: warning: 'vTimerCallback' declared 'static' but never defined [-Wunused-function]
+ static void vTimerCallback( TimerHandle_t pxTimer );
+             ^
+../src/freertos_hello_world.c:142:22: warning: 'xTimer' defined but not used [-Wunused-variable]
+ static TimerHandle_t xTimer = NULL;
+                      ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 152656	   4244	2152752	2309652	 233e14	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:23:56 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:28:51 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'SendData':
+../src/freertos_hello_world.c:243:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/freertos_hello_world.c:242:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 152648	   4228	2152752	2309628	 233dfc	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:29:15 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 152648	   4228	2152752	2309628	 233dfc	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:29:20 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:31:55 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:38:47 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'SendData':
+../src/freertos_hello_world.c:324:4: error: 'p' undeclared (first use in this function)
+    p = pbuf_alloc(PBUF_TRANSPORT, pbuflen, PBUF_POOL);
+    ^
+../src/freertos_hello_world.c:324:4: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:332:13: error: 'pcb' undeclared (first use in this function)
+    udp_send(pcb, p);
+             ^
+../src/freertos_hello_world.c:334:4: error: 'count' undeclared (first use in this function)
+    count = 0;
+    ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:39:36 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'SendData':
+../src/freertos_hello_world.c:333:13: error: 'pcb' undeclared (first use in this function)
+    udp_send(pcb, p);
+             ^
+../src/freertos_hello_world.c:333:13: note: each undeclared identifier is reported only once for each function it appears in
+../src/freertos_hello_world.c:335:4: error: 'count' undeclared (first use in this function)
+    count = 0;
+    ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:40:08 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'SendData':
+../src/freertos_hello_world.c:336:4: error: 'count' undeclared (first use in this function)
+    count = 0;
+    ^
+../src/freertos_hello_world.c:336:4: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:40:18 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 152952	   4236	2152752	2309940	 233f34	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:40:44 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+15:42:39 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'SendData':
+../src/freertos_hello_world.c:323:9: error: 'count' undeclared (first use in this function)
+   while(count!=8000)
+         ^
+../src/freertos_hello_world.c:323:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/freertos_hello_world.o] Fehler 1
+15:43:13 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153016	   4236	2152752	2310004	 233f74	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+15:44:21 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+16:01:55 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:371:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+../src/freertos_hello_world.c: At top level:
+../src/freertos_hello_world.c:135:13: warning: 'DriveFan' used but never defined
+ static void DriveFan(void *pvParameters);
+             ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+./src/freertos_hello_world.o: In function `main':
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:204: undefined reference to `DriveFan'
+C:\Studienarbeit_Final\Final_Design\Final_Design.sdk\Example_RTOS\Debug/../src/freertos_hello_world.c:204: undefined reference to `DriveFan'
+collect2.exe: error: ld returned 1 exit status
+make: *** [Example_RTOS.elf] Fehler 1
+16:02:53 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:371:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153568	   4236	2152752	2310556	 23419c	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+16:08:39 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'udp_echo_recv':
+../src/freertos_hello_world.c:185:6: error: 'recvd_num' undeclared (first use in this function)
+      recvd_num = strtol(ret+1, &ptr, 10);
+      ^
+../src/freertos_hello_world.c:185:6: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../src/freertos_hello_world.c:100:0:
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:407:15: error: 'xQueue2' undeclared (first use in this function)
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:80: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                ^
+../src/freertos_hello_world.c:407:24: error: 'recvd_num' undeclared (first use in this function)
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+                        ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:92: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                            ^
+../src/freertos_hello_world.c:379:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:09:36 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:214:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:248:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:247:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:75:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:76:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:80:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:81:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181852	   4244	2218272	2404368	 24b010	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+16:10:25 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+In file included from ../src/freertos_hello_world.c:100:0:
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:408:15: error: 'xQueue2' undeclared (first use in this function)
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:80: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                ^
+../src/freertos_hello_world.c:408:15: note: each undeclared identifier is reported only once for each function it appears in
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:80: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                ^
+../src/freertos_hello_world.c:380:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:11:27 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'main':
+../src/freertos_hello_world.c:234:2: error: 'xQueue2' undeclared (first use in this function)
+  xQueue2 = xQueueCreate(1, sizeof(int));
+  ^
+../src/freertos_hello_world.c:234:2: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../src/freertos_hello_world.c:100:0:
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:409:15: error: 'xQueue2' undeclared (first use in this function)
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:80: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                ^
+../src/freertos_hello_world.c:381:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:12:08 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c:145:1: error: unknown type name 'tatic'
+ tatic QueueHandle_t xQueue2 = NULL;
+ ^
+../src/freertos_hello_world.c:145:21: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'xQueue2'
+ tatic QueueHandle_t xQueue2 = NULL;
+                     ^
+../src/freertos_hello_world.c: In function 'main':
+../src/freertos_hello_world.c:235:2: error: 'xQueue2' undeclared (first use in this function)
+  xQueue2 = xQueueCreate(1, sizeof(int));
+  ^
+../src/freertos_hello_world.c:235:2: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../src/freertos_hello_world.c:100:0:
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:410:15: error: 'xQueue2' undeclared (first use in this function)
+   xQueueSend( xQueue2,&recvd_num, 0UL );
+               ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:421:80: note: in definition of macro 'xQueueSend'
+ #define xQueueSend( xQueue, pvItemToQueue, xTicksToWait ) xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
+                                                                                ^
+../src/freertos_hello_world.c:382:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:12:27 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'ReceiveData':
+../src/freertos_hello_world.c:382:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+                   ^
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153860	   4236	2152752	2310848	 2342c0	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+16:12:47 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153796	   4236	2152752	2310784	 234280	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+16:15:52 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+In file included from ../src/freertos_hello_world.c:100:0:
+../src/freertos_hello_world.c: In function 'DriveFan':
+../src/freertos_hello_world.c:423:28: error: 'output' undeclared (first use in this function)
+   xQueueReceive(  xQueue2,&output,portMAX_DELAY );
+                            ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:814:93: note: in definition of macro 'xQueueReceive'
+ #define xQueueReceive( xQueue, pvBuffer, xTicksToWait ) xQueueGenericReceive( ( xQueue ), ( pvBuffer ), ( xTicksToWait ), pdFALSE )
+                                                                                             ^
+../src/freertos_hello_world.c:423:28: note: each undeclared identifier is reported only once for each function it appears in
+   xQueueReceive(  xQueue2,&output,portMAX_DELAY );
+                            ^
+../../Example_RTOS_bsp/ps7_cortexa9_0/include/queue.h:814:93: note: in definition of macro 'xQueueReceive'
+ #define xQueueReceive( xQueue, pvBuffer, xTicksToWait ) xQueueGenericReceive( ( xQueue ), ( pvBuffer ), ( xTicksToWait ), pdFALSE )
+                                                                                             ^
+../src/freertos_hello_world.c:425:13: error: 'MY_OUTPUT' undeclared (first use in this function)
+   Xil_Out32(MY_OUTPUT, output*2);
+             ^
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:16:20 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c: In function 'DriveFan':
+../src/freertos_hello_world.c:426:13: error: 'MY_OUTPUT' undeclared (first use in this function)
+   Xil_Out32(MY_OUTPUT, output*2);
+             ^
+../src/freertos_hello_world.c:426:13: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/freertos_hello_world.o] Fehler 1
+16:17:18 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153940	   4236	2152752	2310928	 234310	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+16:18:58 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+16:20:49 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+16:23:49 **** Auto Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+'Finished building: ../src/freertos_hello_world.c'
+' '
+'Building target: Example_RTOS.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../Example_RTOS_bsp/ps7_cortexa9_0/lib -o "Example_RTOS.elf"  ./src/echo.o ./src/freertos_hello_world.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: Example_RTOS.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size Example_RTOS.elf  |tee "Example_RTOS.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 153940	   4236	2152752	2310928	 234310	Example_RTOS.elf
+'Finished building: Example_RTOS.elf.size'
+' '
+16:24:15 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+16:26:14 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.
+16:30:00 **** Incremental Build of configuration Debug for project Example_RTOS ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+make: Für das Ziel »main-build« ist nichts zu tun.

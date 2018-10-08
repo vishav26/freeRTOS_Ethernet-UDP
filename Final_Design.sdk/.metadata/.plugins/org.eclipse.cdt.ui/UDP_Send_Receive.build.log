@@ -1,0 +1,47 @@
+16:09:36 **** Auto Build of configuration Debug for project UDP_Send_Receive ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../UDP_Send_Receive_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:214:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:248:19: warning: unused variable 'xTicksToWait' [-Wunused-variable]
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 1000 );
+                   ^
+../src/main.c:247:13: warning: unused variable 'xStatus' [-Wunused-variable]
+  BaseType_t xStatus;
+             ^
+../src/main.c: At top level:
+../src/main.c:75:13: warning: 'UDPReceive' declared 'static' but never defined [-Wunused-function]
+ static void UDPReceive( void *pvParameters );
+             ^
+../src/main.c:76:13: warning: 'WriteAnalog' declared 'static' but never defined [-Wunused-function]
+ static void WriteAnalog( void *pvParameters );
+             ^
+../src/main.c:80:21: warning: 'xUDPReceive' defined but not used [-Wunused-variable]
+ static TaskHandle_t xUDPReceive;
+                     ^
+../src/main.c:81:21: warning: 'xWriteAnalog' defined but not used [-Wunused-variable]
+ static TaskHandle_t xWriteAnalog;
+                     ^
+'Finished building: ../src/main.c'
+' '
+'Building target: UDP_Send_Receive.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -L../../UDP_Send_Receive_bsp/ps7_cortexa9_0/lib -o "UDP_Send_Receive.elf"  ./src/echo.o ./src/i2c_access.o ./src/iic_phyreset.o ./src/main.o ./src/platform.o ./src/platform_mb.o ./src/platform_ppc.o ./src/platform_zynq.o ./src/platform_zynqmp.o ./src/sfp.o ./src/si5324.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group -Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group
+'Finished building target: UDP_Send_Receive.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size UDP_Send_Receive.elf  |tee "UDP_Send_Receive.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 181852	   4244	2218272	2404368	 24b010	UDP_Send_Receive.elf
+'Finished building: UDP_Send_Receive.elf.size'
+' '
+
+16:09:43 Build Finished (took 6s.625ms)
+

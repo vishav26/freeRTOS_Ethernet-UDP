@@ -1,0 +1,13 @@
+15:33:57 **** Auto Build of configuration Debug for project Old_Project ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/freertos_hello_world.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/freertos_hello_world.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Old_Project_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/freertos_hello_world.d" -MT"src/freertos_hello_world.o" -o "src/freertos_hello_world.o" "../src/freertos_hello_world.c"
+../src/freertos_hello_world.c:47:21: fatal error: xsysmon.h: No such file or directory
+compilation terminated.
+make: *** [src/freertos_hello_world.o] Fehler 1
+
+15:33:58 Build Finished (took 743ms)
+

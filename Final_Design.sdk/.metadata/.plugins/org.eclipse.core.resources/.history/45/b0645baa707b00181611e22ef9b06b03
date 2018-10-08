@@ -1,0 +1,447 @@
+/******************************************************************************
+*
+* Copyright (C) 2016 Xilinx, Inc.  All rights reserved.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* Use of the Software is limited solely to applications:
+* (a) running on a Xilinx device, or
+* (b) that interact with a Xilinx device through a bus or interconnect.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* XILINX  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+* OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+* Except as contained in this notice, the name of the Xilinx shall not be used
+* in advertising or otherwise to promote the sale, use or other dealings in
+* this Software without prior written authorization from Xilinx.
+*
+******************************************************************************/
+
+#include <stdio.h>
+#include "xparameters.h"
+#include "netif/xadapter.h"
+#include "platform.h"
+#include "platform_config.h"
+#include "xil_printf.h"
+
+#include "lwip/udp.h"
+#include "xil_cache.h"
+#if LWIP_DHCP==1
+#include "lwip/dhcp.h"
+#endif
+
+
+#include "xil_io.h"
+
+#define DELAY_100_MILLISECONDS		100UL
+#define DELAY_92_MILLISECONDS		80UL
+#define DELAY_1_MILLISECOND			1UL
+
+#define MY_COUNTER 0x43C10000 //Address of base register of My_Counter IP
+#define MY_OUTPUT 0x43C00000//Address of base register of My_Output IP
+
+#ifdef XPS_BOARD_ZCU102
+#ifdef XPAR_XIICPS_0_DEVICE_ID
+int IicPhyReset(void);
+#endif
+#endif
+
+void print_app_header();
+int start_application();
+int transfer_data();
+void tcp_fasttmr(void);
+void tcp_slowtmr(void);
+
+static void UDPReceive( void *pvParameters );
+static void WriteAnalog( void *pvParameters );
+static void UDPSend( void *pvParameters );
+static void ReadAnalog( void *pvParameters );
+static TaskHandle_t xUDPReceive;
+static TaskHandle_t xWriteAnalog;
+static TaskHandle_t xUDPSend;
+static TaskHandle_t xAnalogRead;
+
+static QueueHandle_t xQueue1 = NULL;
+static QueueHandle_t xQueue2 = NULL;
+
+void lwip_init();
+
+#if LWIP_DHCP==1
+extern volatile int dhcp_timoutcntr;
+err_t dhcp_start(struct netif *netif);
+#endif
+
+//#define THREAD_STACKSIZE 1024
+
+static struct netif server_netif;
+struct netif *echo_netif;
+char data[10];
+float output;
+int value_new, value_old;
+char sendmsg[]="SensorRPM ";
+long recvd_num;
+extern struct ip_addr ip_remote;
+
+
+void
+print_ip(char *msg, struct ip_addr *ip)
+{
+	xil_printf(msg);
+	xil_printf("%d.%d.%d.%d\n\r", ip4_addr1(ip), ip4_addr2(ip),
+			ip4_addr3(ip), ip4_addr4(ip));
+}
+
+void
+print_ip_settings(struct ip_addr *ip, struct ip_addr *mask, struct ip_addr *gw)
+{
+
+	print_ip("Board IP: ", ip);
+	print_ip("Netmask : ", mask);
+	print_ip("Gateway : ", gw);
+}
+
+
+#if defined (__arm__) && !defined (ARMR5)
+#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
+int ProgramSi5324(void);
+int ProgramSfpPhy(void);
+#endif
+#endif
+
+#ifdef XPS_BOARD_ZCU102
+#ifdef XPAR_XIICPS_0_DEVICE_ID
+int IicPhyReset(void);
+#endif
+#endif
+
+int count = 0;
+struct pbuf *p;
+extern struct udp_pcb *pcb;
+int main()
+{
+
+	/*Task Creation*/
+	xTaskCreate( 	WriteAnalog, 			/* The function that implements the task. */
+			 					( const char * ) "Motor", 		/* Text name for the task, provided to assist debugging only. */
+			 					configMINIMAL_STACK_SIZE, 	/* The stack allocated to the task. */
+			 					NULL, 						/* The task parameter is not used, so set to NULL. */
+			 					tskIDLE_PRIORITY +2,			/* The task runs at the idle priority. */
+			 					&xWriteAnalog );
+
+	xTaskCreate(UDPReceive,
+						( const char * ) "UDP_Receive",
+						configMINIMAL_STACK_SIZE,
+						NULL,
+						tskIDLE_PRIORITY+1,
+						&xUDPReceive);
+
+	xTaskCreate( 	ReadAnalog, 			/* The function that implements the task. */
+				 					( const char * ) "Sensor", 		/* Text name for the task, provided to assist debugging only. */
+				 					configMINIMAL_STACK_SIZE, 	/* The stack allocated to the task. */
+				 					NULL, 						/* The task parameter is not used, so set to NULL. */
+				 					tskIDLE_PRIORITY +1,			/* The task runs at the idle priority. */
+				 					&xAnalogRead );
+
+		xTaskCreate(UDPSend,
+							( const char * ) "UDP_Send",
+							configMINIMAL_STACK_SIZE *2,
+							NULL,
+							tskIDLE_PRIORITY +2,
+							&xUDPSend);
+
+	/* Create the queue used by the tasks.  The Rx task has a higher priority
+		than the Tx task, so will preempt the Tx task and remove values from the
+		queue as soon as the Tx task writes to the queue - therefore the queue can
+		never have more than one item in it. */
+		xQueue1 = xQueueCreate( 	1,						/* There is only one space in the queue. */
+								sizeof( float ) );	/* Each space in the queue is large enough to hold a uint32_t. */
+
+		xQueue2 = xQueueCreate( 	1,						/* There is only one space in the queue. */
+										sizeof( float ) );	/* Each space in the queue is large enough to hold a uint32_t. */
+		/* Check the queue was created. */
+			configASSERT( xQueue1 );
+			configASSERT( xQueue2 );
+	xLastWakeTime = xTaskGetTickCount();
+	vTaskStartScheduler();
+	while(1);
+	return 0;
+}
+
+void udp_echo_recv(void *arg, struct udp_pcb *pcb_recv, struct pbuf *p, struct ip_addr *addr, u16_t port)
+{
+      if (p != NULL)
+      {
+    	  	  	xil_printf("Receiving Data\n");
+    	  	  	const char space = ' ';
+    	  	    char *ptr, *ret;
+
+    	  	    ret = strchr(p->payload, space);
+    	  	    recvd_num = strtol(ret+1, &ptr, 10);
+
+      }
+}
+
+static void UDPReceive(void *pvParameters)
+{
+	BaseType_t xStatus;
+	//TickType_t xLastWakeTime;
+	err_t err_recv;
+	unsigned port_recv = 17224;
+	struct udp_pcb *pcb_recv;
+	const TickType_t x100ms = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+
+	/* Creating new pcb for UDP Receive */
+	pcb_recv = udp_new();
+		if (!pcb) {
+			xil_printf("Error creating PCB. Out of Memory\n\r");
+
+		}
+
+	/* bind to specified @port */
+	err_recv = udp_bind(pcb_recv, IP_ADDR_ANY, port_recv);
+	if (err_recv != ERR_OK)
+	{
+		xil_printf("Unable to bind to port %d: err = %d\n\r", port_recv, err_recv);
+
+	}
+
+	/* Connect pcb to pc ip */
+	IP4_ADDR(&ip_remote, 192, 168, 1, 1);
+		err_recv = udp_connect(pcb_recv, &ip_remote, port_recv);
+		if (err_recv != 0)
+		{
+		xil_printf("Failed %d\r\n", err_recv);
+		}
+
+	for(;;)
+	{
+		//vTaskDelay(x1ms );
+		xil_printf("UDPReceiveTask\n");
+		vTaskDelay  (x100ms);
+		udp_recv(pcb_recv, udp_echo_recv, NULL);
+		xStatus = xQueueSendToBack( xQueue2, &recvd_num, 0 );
+		if( xStatus != pdPASS )
+			 {
+			 /* The send operation could not complete because the queue was full -
+			 this must be an error as the queue should never contain more than
+			 one item! */
+			 printf( "Could not send to the queue.\r\n" );
+			 }
+	}
+}
+
+static void WriteAnalog(void *pvParameters)
+{
+
+	BaseType_t xStatus;
+	const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+	const TickType_t x1ms = pdMS_TO_TICKS( DELAY_1_MILLISECOND );
+	for(;;)
+	{
+		//vTaskDelay( x1ms );
+		xil_printf("PWM Task\n");
+		/* This call should always find the queue empty because this task will
+						 immediately remove any data that is written to the queue. */
+						if( uxQueueMessagesWaiting( xQueue2 ) != 0 )
+						 {
+						 printf( "Queue should have been empty!\r\n" );
+						 }
+
+						/* Receive data from the queue.
+						 The first parameter is the queue from which data is to be received. The
+						 queue is created before the scheduler is started, and therefore before this
+						 task runs for the first time.
+						 The second parameter is the buffer into which the received data will be
+						 placed. In this case the buffer is simply the address of a variable that
+						 has the required size to hold the received data.
+						 The last parameter is the block time – the maximum amount of time that the
+						 task will remain in the Blocked state to wait for data to be available
+						 should the queue already be empty. */
+
+					xStatus = xQueueReceive (xQueue2, &output,xTicksToWait);
+
+						if( xStatus != pdPASS )
+					 	 {
+					 /* The receive operation could not complete because the queue was empty -
+					 this must be an error as the queue should never contain more than
+					 one item!*/
+					 printf( "Could not receive from the queue1.\r\n" );
+					 	 }
+
+					//xil_printf("We are in Task 2\n");
+					//printf("The Output is %0f\n",output);
+					Xil_Out32(MY_OUTPUT, output*2);
+
+
+
+	}
+}
+
+static void ReadAnalog(void *pvParameters)
+{
+	BaseType_t xStatus;
+	const TickType_t x100ms = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+	//
+	//xLastWakeTime = xTaskGetTickCount();
+		for( ;; )
+		{
+			//xil_printf("Read Sensor\n");
+			value_old = Xil_In32(MY_COUNTER);
+			/* Delay for 1 second. */
+			vTaskDelay( x100ms );
+			value_new = Xil_In32(MY_COUNTER);
+			value_new = value_new - value_old;
+			xil_printf("Sensor Value = %d\n",value_new);
+			if(value_new <0)
+			{
+				value_new = 255 + value_new;
+			}
+			/* Send the next value on the queue.  The queue should always be
+			empty at this point so a block time of 0 is used. */
+			xStatus = xQueueSendToBack( xQueue1,			/* The queue being written to. */
+						&value_new, /* The address of the data being sent. */
+						0 );			/* The block time. */
+			if( xStatus != pdPASS )
+				 {
+				 /* The send operation could not complete because the queue was full -
+				 this must be an error as the queue should never contain more than
+				 one item! */
+				 printf( "Could not send to the queue.\r\n" );
+				 }
+
+		}
+
+
+}
+
+static void UDPSend(void *pvParameters)
+{
+	struct ip_addr ipaddr, netmask, gw;
+	float output;
+	BaseType_t xStatus;
+	const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+
+	/* the mac address of the board. this should be unique per board */
+	unsigned char mac_ethernet_address[] = { 0x00, 0x0a, 0x35, 0x00, 0x01, 0x02 };
+
+	echo_netif = &server_netif;
+	#if defined (__arm__) && !defined (ARMR5)
+	#if XPAR_GIGE_PCS_PMA_SGMII_CORE_PRESENT == 1 || XPAR_GIGE_PCS_PMA_1000BASEX_CORE_PRESENT == 1
+		ProgramSi5324();
+		ProgramSfpPhy();
+	#endif
+	#endif
+
+	/* Define this board specific macro in order perform PHY reset on ZCU102 */
+	#ifdef XPS_BOARD_ZCU102
+		IicPhyReset();
+	#endif
+
+
+
+	int len =0;
+	len = sizeof(data);
+	data[len] = data[len];
+	init_platform();
+
+
+	/* initliaze IP addresses to be used */
+	IP4_ADDR(&ipaddr,  192, 168,   1, 10);
+	IP4_ADDR(&netmask, 255, 255, 255,  0);
+	IP4_ADDR(&gw,      192, 168,   1,  1);
+
+	print_app_header();
+
+	lwip_init();
+
+	/* Add network interface to the netif_list, and set it as default */
+	if (!xemac_add(echo_netif, &ipaddr, &netmask,
+							&gw, mac_ethernet_address,
+							PLATFORM_EMAC_BASEADDR))
+		{
+			xil_printf("Error adding N/W interface\n\r");
+
+		}
+
+	netif_set_default(echo_netif);
+
+	/* now enable interrupts */
+	platform_enable_interrupts();
+
+	/* specify that the network if is up */
+	netif_set_up(echo_netif);
+
+
+	xil_printf("Configuring default IP of 192.168.1.10\r\n");
+	IP4_ADDR(&(echo_netif->ip_addr),  192, 168,   1, 10);
+	IP4_ADDR(&(echo_netif->netmask), 255, 255, 255,  0);
+	IP4_ADDR(&(echo_netif->gw),      192, 168,   1,  1);
+
+
+	ipaddr.addr = echo_netif->ip_addr.addr;
+	gw.addr = echo_netif->gw.addr;
+	netmask.addr = echo_netif->netmask.addr;
+
+
+	print_ip_settings(&ipaddr, &netmask, &gw);
+
+	/* start the application (web server, rxtest, txtest, etc..) */
+	start_application();
+	for(;;)
+	{
+		//xil_printf("Send UDP\n");
+	if( uxQueueMessagesWaiting( xQueue1 ) != 0 )
+	{
+		printf( "Queue should have been empty!\r\n" );
+	}
+
+
+	xStatus = xQueueReceive (xQueue1, &output,xTicksToWait);
+	xil_printf("Fan Value Sent via UDP\n");
+	while(count!=8000)
+	{
+		xemacif_input(echo_netif);
+		count++;
+	}
+
+
+	int output_rpm = output*60;
+	sprintf(data,"%d",output_rpm);
+
+
+	strcat(sendmsg,data);
+	u16_t pbuflen = strlen(sendmsg+1);
+	p = pbuf_alloc(PBUF_TRANSPORT, pbuflen, PBUF_POOL);
+
+	if (!p)
+	{
+		xil_printf("error allocating pbuf \r\n");
+	}
+
+	memcpy(p->payload, sendmsg, pbuflen+1);
+	udp_send(pcb, p);
+	//xil_printf("\n SEND UDP Packets \r\n");
+	count = 0;
+	strcpy(sendmsg,"SensorRPM ");
+	pbuf_free(p);
+
+	if( xStatus != pdPASS )
+	{
+		printf( "Could not receive from the queue1.\r\n" );
+	}
+
+	}
+}

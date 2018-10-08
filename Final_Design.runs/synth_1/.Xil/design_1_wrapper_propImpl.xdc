@@ -1,0 +1,5 @@
+set_property SRC_FILE_INFO {cfile:C:/Studienarbeit_Final/Final_Design/Final_Design.srcs/constrs_1/new/Fan_Constraints.xdc rfile:../../../Final_Design.srcs/constrs_1/new/Fan_Constraints.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN V12 [get_ports Fan_Output]
+set_property src_info {type:XDC file:1 line:8 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN T20 [get_ports Fan_Signal]

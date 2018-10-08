@@ -1,0 +1,125 @@
+12:45:36 **** Build of configuration Debug for project Test ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/echo.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/echo.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/echo.d" -MT"src/echo.o" -o "src/echo.o" "../src/echo.c"
+'Finished building: ../src/echo.c'
+' '
+'Building file: ../src/i2c_access.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/i2c_access.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/i2c_access.d" -MT"src/i2c_access.o" -o "src/i2c_access.o" "../src/i2c_access.c"
+'Finished building: ../src/i2c_access.c'
+' '
+'Building file: ../src/iic_phyreset.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_phyreset.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_phyreset.d" -MT"src/iic_phyreset.o" -o "src/iic_phyreset.o" "../src/iic_phyreset.c"
+'Finished building: ../src/iic_phyreset.c'
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../Example_RTOS_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c:74:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPReceive;
+        ^
+../src/main.c:75:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xWriteAnalog;
+        ^
+../src/main.c:76:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xUDPSend;
+        ^
+../src/main.c:77:8: error: unknown type name 'TaskHandle_t'
+ static TaskHandle_t xAnalogRead;
+        ^
+../src/main.c:79:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue1 = NULL;
+        ^
+../src/main.c:79:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue1 = NULL;
+                                ^
+../src/main.c:80:8: error: unknown type name 'QueueHandle_t'
+ static QueueHandle_t xQueue2 = NULL;
+        ^
+../src/main.c:80:32: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ static QueueHandle_t xQueue2 = NULL;
+                                ^
+../src/main.c: In function 'main':
+../src/main.c:139:2: warning: implicit declaration of function 'xTaskCreate' [-Wimplicit-function-declaration]
+  xTaskCreate(  WriteAnalog,    /* The function that implements the task. */
+  ^
+../src/main.c:141:10: error: 'configMINIMAL_STACK_SIZE' undeclared (first use in this function)
+          configMINIMAL_STACK_SIZE,  /* The stack allocated to the task. */
+          ^
+../src/main.c:141:10: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:143:10: error: 'tskIDLE_PRIORITY' undeclared (first use in this function)
+          tskIDLE_PRIORITY +2,   /* The task runs at the idle priority. */
+          ^
+../src/main.c:176:13: warning: implicit declaration of function 'xQueueCreate' [-Wimplicit-function-declaration]
+   xQueue1 = xQueueCreate(  1,      /* There is only one space in the queue. */
+             ^
+../src/main.c:182:4: warning: implicit declaration of function 'configASSERT' [-Wimplicit-function-declaration]
+    configASSERT( xQueue1 );
+    ^
+../src/main.c:185:2: warning: implicit declaration of function 'vTaskStartScheduler' [-Wimplicit-function-declaration]
+  vTaskStartScheduler();
+  ^
+../src/main.c: In function 'UDPReceive':
+../src/main.c:206:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:212:8: error: unknown type name 'TickType_t'
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+        ^
+../src/main.c:212:28: warning: implicit declaration of function 'pdMS_TO_TICKS' [-Wimplicit-function-declaration]
+  const TickType_t x200ms = pdMS_TO_TICKS( DELAY_200_MILLISECONDS );
+                            ^
+../src/main.c:242:3: warning: implicit declaration of function 'vTaskDelay' [-Wimplicit-function-declaration]
+   vTaskDelay(x200ms);
+   ^
+../src/main.c:243:13: warning: implicit declaration of function 'xQueueSendToBack' [-Wimplicit-function-declaration]
+   xStatus = xQueueSendToBack( xQueue2, &recvd_num, 0 );
+             ^
+../src/main.c:244:18: error: 'pdPASS' undeclared (first use in this function)
+   if( xStatus != pdPASS )
+                  ^
+../src/main.c: In function 'WriteAnalog':
+../src/main.c:258:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:259:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:267:11: warning: implicit declaration of function 'uxQueueMessagesWaiting' [-Wimplicit-function-declaration]
+       if( uxQueueMessagesWaiting( xQueue2 ) != 0 )
+           ^
+../src/main.c:284:16: warning: implicit declaration of function 'xQueueReceive' [-Wimplicit-function-declaration]
+      xStatus = xQueueReceive (xQueue2, &output,xTicksToWait);
+                ^
+../src/main.c:286:22: error: 'pdPASS' undeclared (first use in this function)
+       if( xStatus != pdPASS )
+                      ^
+../src/main.c: In function 'ReadAnalog':
+../src/main.c:305:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:306:8: error: unknown type name 'TickType_t'
+  const TickType_t x100ms = pdMS_TO_TICKS( DELAY_100_MILLISECONDS );
+        ^
+../src/main.c:327:19: error: 'pdPASS' undeclared (first use in this function)
+    if( xStatus != pdPASS )
+                   ^
+../src/main.c: In function 'UDPSend':
+../src/main.c:344:2: error: unknown type name 'BaseType_t'
+  BaseType_t xStatus;
+  ^
+../src/main.c:345:8: error: unknown type name 'TickType_t'
+  const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+        ^
+../src/main.c:451:17: error: 'pdPASS' undeclared (first use in this function)
+  if( xStatus != pdPASS )
+                 ^
+make: *** [src/main.o] Fehler 1
+
+12:45:37 Build Finished (took 1s.355ms)
+
